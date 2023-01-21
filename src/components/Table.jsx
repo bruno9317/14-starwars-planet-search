@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+// import { useEffect } from 'react';
 import { PlanetContext } from '../context/PlanetContext';
 
 function Table() {
