@@ -1,16 +1,24 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import { useEffect } from 'react';
 import { PlanetContext } from '../context/PlanetContext';
+import { SearchContext } from '../context/SearchContext';
 
 function Table() {
   const { planets } = useContext(PlanetContext);
+  const { planetSearch } = useContext(SearchContext);
+
+  const [planetas, setPlanetas] = useState(planets);
 
   useEffect(() => {
-    console.log(planets);
-    const names = planets.map((p) => p.name);
-    // const names = Object.values(planets);
-    console.log(names);
-  }, []);
+    if (planetSearch !== '') {
+      const receba = planetas.filter((p) => p.name.includes(planetSearch));
+      console.log(planetSearch);
+      console.log(receba);
+      setPlanetas(receba);
+    } else {
+      setPlanetas(planets);
+    }
+  }, [planetSearch]);
 
   return (
     <table>
@@ -32,7 +40,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        { planets.map((p) => (
+        { planetas.map((p) => (
           <tr key={ p.name }>
             <td>{p.name}</td>
             <td>{p.rotation_period}</td>
