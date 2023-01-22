@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FilterContext } from '../context/FilterContext';
 
 function Filter() {
@@ -7,6 +7,13 @@ function Filter() {
     comparison: 'maior que',
     value: '0' });
   const { saveFiltro } = useContext(FilterContext);
+  const [selects2, setSelects2] = useState([]);
+
+  useEffect(() => {
+    const selects = ['population',
+      'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+    setSelects2(selects);
+  }, []);
 
   const handleChange = (e) => {
     setFiltro({
@@ -16,7 +23,13 @@ function Filter() {
   };
 
   const handleClick = () => {
+    const novosSelects = selects2.filter((p) => p !== filtro.column);
+    setSelects2(novosSelects);
     saveFiltro(filtro);
+    setFiltro({
+      ...filtro,
+      column: selects2[1],
+    });
   };
 
   return (
@@ -30,11 +43,7 @@ function Filter() {
           onChange={ handleChange }
           data-testid="column-filter"
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          { selects2.map((p) => <option value={ p } key={ p }>{ p }</option>) }
         </select>
       </label>
       <label htmlFor="select2">
