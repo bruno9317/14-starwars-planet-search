@@ -18,66 +18,66 @@ function Table() {
 
   const filtraPopulation = (comparison, value) => {
     if (comparison === 'igual a') {
-      const lista = planets.filter((p) => parseInt(p.population, 10) === value);
+      const lista = planetas.filter((p) => parseInt(p.population, 10) === value);
       setPlanetas(lista);
       console.log(lista);
     } else if (comparison === 'menor que') {
-      const lista = planets.filter((p) => p.population < value);
+      const lista = planetas.filter((p) => p.population < value);
       setPlanetas(lista);
     } else if (comparison === 'maior que') {
-      const lista = planets.filter((p) => p.population > value);
+      const lista = planetas.filter((p) => p.population > value);
       setPlanetas(lista);
     }
   };
 
   const filtraOrbital = (comparison, value) => {
     if (comparison === 'igual a') {
-      const lista = planets.filter((p) => p.orbital_period === value);
+      const lista = planetas.filter((p) => p.orbital_period === value);
       setPlanetas(lista);
     } else if (comparison === 'menor que') {
-      const lista = planets.filter((p) => p.orbital_period < value);
+      const lista = planetas.filter((p) => p.orbital_period < value);
       setPlanetas(lista);
     } else if (comparison === 'maior que') {
-      const lista = planets.filter((p) => p.orbital_period > value);
+      const lista = planetas.filter((p) => p.orbital_period > value);
       setPlanetas(lista);
     }
   };
 
   const filtraRotation = (comparison, value) => {
     if (comparison === 'igual a') {
-      const lista = planets.filter((p) => p.rotation_period === value);
+      const lista = planetas.filter((p) => parseInt(p.rotation_period, 10) === value);
       setPlanetas(lista);
     } else if (comparison === 'menor que') {
-      const lista = planets.filter((p) => p.rotation_period < value);
+      const lista = planetas.filter((p) => p.rotation_period < value);
       setPlanetas(lista);
     } else if (comparison === 'maior que') {
-      const lista = planets.filter((p) => p.rotation_period > value);
+      const lista = planetas.filter((p) => p.rotation_period > value);
       setPlanetas(lista);
     }
   };
 
   const filtraDiameter = (comparison, value) => {
     if (comparison === 'igual a') {
-      const lista = planets.filter((p) => p.diameter === value);
+      const lista = planetas.filter((p) => p.diameter === value);
       setPlanetas(lista);
     } else if (comparison === 'menor que') {
-      const lista = planets.filter((p) => p.diameter < value);
+      const lista = planetas.filter((p) => p.diameter < value);
       setPlanetas(lista);
     } else if (comparison === 'maior que') {
-      const lista = planets.filter((p) => p.diameter > value);
+      const lista = planetas.filter((p) => p.diameter > value);
       setPlanetas(lista);
     }
   };
 
   const filtraSurface = (comparison, value) => {
     if (comparison === 'igual a') {
-      const lista = planets.filter((p) => p.surface_water === value);
+      const lista = planetas.filter((p) => p.surface_water === value);
       setPlanetas(lista);
     } else if (comparison === 'menor que') {
-      const lista = planets.filter((p) => p.surface_water < value);
+      const lista = planetas.filter((p) => p.surface_water < value);
       setPlanetas(lista);
     } else if (comparison === 'maior que') {
-      const lista = planets.filter((p) => p.surface_water > value);
+      const lista = planetas.filter((p) => p.surface_water > value);
       setPlanetas(lista);
     }
   };
