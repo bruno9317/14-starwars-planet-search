@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { FilterContext } from '../context/FilterContext';
 // import { useEffect } from 'react';
 import { PlanetContext } from '../context/PlanetContext';
 import { SearchContext } from '../context/SearchContext';
@@ -6,19 +7,99 @@ import { SearchContext } from '../context/SearchContext';
 function Table() {
   const { planets } = useContext(PlanetContext);
   const { planetSearch } = useContext(SearchContext);
+  const { filter } = useContext(FilterContext);
 
   const [planetas, setPlanetas] = useState(planets);
 
   useEffect(() => {
-    if (planetSearch !== '') {
-      const receba = planetas.filter((p) => p.name.includes(planetSearch));
-      console.log(planetSearch);
-      console.log(receba);
-      setPlanetas(receba);
-    } else {
-      setPlanetas(planets);
-    }
+    const receba = planets.filter((p) => p.name.toLowerCase().includes(planetSearch));
+    setPlanetas(receba);
   }, [planetSearch]);
+
+  const filtraPopulation = (comparison, value) => {
+    if (comparison === 'igual a') {
+      const lista = planets.filter((p) => parseInt(p.population, 10) === value);
+      setPlanetas(lista);
+      console.log(lista);
+    } else if (comparison === 'menor que') {
+      const lista = planets.filter((p) => p.population < value);
+      setPlanetas(lista);
+    } else if (comparison === 'maior que') {
+      const lista = planets.filter((p) => p.population > value);
+      setPlanetas(lista);
+    }
+  };
+
+  const filtraOrbital = (comparison, value) => {
+    if (comparison === 'igual a') {
+      const lista = planets.filter((p) => p.orbital_period === value);
+      setPlanetas(lista);
+    } else if (comparison === 'menor que') {
+      const lista = planets.filter((p) => p.orbital_period < value);
+      setPlanetas(lista);
+    } else if (comparison === 'maior que') {
+      const lista = planets.filter((p) => p.orbital_period > value);
+      setPlanetas(lista);
+    }
+  };
+
+  const filtraRotation = (comparison, value) => {
+    if (comparison === 'igual a') {
+      const lista = planets.filter((p) => p.rotation_period === value);
+      setPlanetas(lista);
+    } else if (comparison === 'menor que') {
+      const lista = planets.filter((p) => p.rotation_period < value);
+      setPlanetas(lista);
+    } else if (comparison === 'maior que') {
+      const lista = planets.filter((p) => p.rotation_period > value);
+      setPlanetas(lista);
+    }
+  };
+
+  const filtraDiameter = (comparison, value) => {
+    if (comparison === 'igual a') {
+      const lista = planets.filter((p) => p.diameter === value);
+      setPlanetas(lista);
+    } else if (comparison === 'menor que') {
+      const lista = planets.filter((p) => p.diameter < value);
+      setPlanetas(lista);
+    } else if (comparison === 'maior que') {
+      const lista = planets.filter((p) => p.diameter > value);
+      setPlanetas(lista);
+    }
+  };
+
+  const filtraSurface = (comparison, value) => {
+    if (comparison === 'igual a') {
+      const lista = planets.filter((p) => p.surface_water === value);
+      setPlanetas(lista);
+    } else if (comparison === 'menor que') {
+      const lista = planets.filter((p) => p.surface_water < value);
+      setPlanetas(lista);
+    } else if (comparison === 'maior que') {
+      const lista = planets.filter((p) => p.surface_water > value);
+      setPlanetas(lista);
+    }
+  };
+
+  useEffect(() => {
+    if (filter.length > 0) {
+      console.log(filter);
+      const { column, comparison, value } = filter[filter.length - 1];
+      if (column === 'population') {
+        filtraPopulation(comparison, parseInt(value, 10));
+      } else if (column === 'orbital_period') {
+        filtraOrbital(comparison, parseInt(value, 10));
+      } else if (column === 'rotation_period') {
+        filtraRotation(comparison, parseInt(value, 10));
+      } else if (column === 'diameter') {
+        filtraDiameter(comparison, parseInt(value, 10));
+        console.log('diaaaameter');
+      } else if (column === 'surface_water') {
+        filtraSurface(comparison, parseInt(value, 10));
+      }
+    }
+  }, [filter]);
 
   return (
     <table>

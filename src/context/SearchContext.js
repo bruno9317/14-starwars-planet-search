@@ -7,7 +7,7 @@ function SearchProvider({ children }) {
   const [planetSearch, setPlanetSearch] = useState('');
 
   const savePlanetName = (planetName) => {
-    setPlanetSearch(planetName);
+    setPlanetSearch(planetName.toLowerCase());
   };
 
   return (
