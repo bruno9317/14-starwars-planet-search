@@ -1,14 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FilterContext } from '../context/FilterContext';
-// import { useEffect } from 'react';
+import { OrderContext } from '../context/OrderContext';
 import { PlanetContext } from '../context/PlanetContext';
 import { SearchContext } from '../context/SearchContext';
+import useOrdena from '../hooks/useOrdena';
 
 function Table() {
+  const {
+    ordenaPopulationASC,
+    ordenaPopulationDESC,
+    ordenaOrbitalASC,
+    ordenaOrbitalDESC,
+    ordenaRotationASC,
+    ordenaRotationDESC,
+    ordenaDiameterASC,
+    ordenaDiameterDESC,
+    ordenaSurfaceASC,
+    ordenaSurfaceDESC,
+  } = useOrdena();
   const { planets } = useContext(PlanetContext);
   const { planetSearch } = useContext(SearchContext);
   const { filter } = useContext(FilterContext);
-
+  const { ordem } = useContext(OrderContext);
   const [planetas, setPlanetas] = useState(planets);
 
   useEffect(() => {
@@ -84,7 +97,6 @@ function Table() {
 
   useEffect(() => {
     if (filter.length > 0) {
-      console.log(filter);
       const { column, comparison, value } = filter[filter.length - 1];
       if (column === 'population') {
         filtraPopulation(comparison, parseInt(value, 10));
@@ -94,12 +106,85 @@ function Table() {
         filtraRotation(comparison, parseInt(value, 10));
       } else if (column === 'diameter') {
         filtraDiameter(comparison, parseInt(value, 10));
-        console.log('diaaaameter');
       } else if (column === 'surface_water') {
         filtraSurface(comparison, parseInt(value, 10));
       }
     }
   }, [filter]);
+
+  // const ordenaSurfaceDESC = () => {
+  //   const magic = -1;
+  //   const lista = planetas.sort((a, b) => {
+  //     if (a.surface_water === 'unknown') {
+  //       return 1;
+  //     }
+  //     if (b.surface_water === 'unknown') {
+  //       return magic;
+  //     }
+  //     if (a.surface_water - b.surface_water < 0) {
+  //       return 1;
+  //     }
+  //     if (b.surface_water - a.surface_water < 0) {
+  //       return magic;
+  //     }
+  //     return 0;
+  //   });
+  //   setPlanetas(lista);
+  // };
+
+  useEffect(() => {
+    if (ordem !== undefined) {
+      const { order } = ordem;
+      const { column, sort } = order;
+      if (column === 'surface_water') {
+        if (sort === 'ASC') {
+          setPlanetas(ordenaSurfaceASC());
+        } else {
+          setPlanetas(ordenaSurfaceDESC());
+        }
+      }
+    }
+  }, [ordem]);
+
+  useEffect(() => {
+    if (ordem !== undefined) {
+      const { order } = ordem;
+      const { column, sort } = order;
+      if (column === 'rotation_period') {
+        if (sort === 'ASC') {
+          setPlanetas(ordenaRotationASC());
+        } else {
+          setPlanetas(ordenaRotationDESC());
+        }
+      } else if (column === 'diameter') {
+        if (sort === 'ASC') {
+          setPlanetas(ordenaDiameterASC());
+        } else {
+          setPlanetas(ordenaDiameterDESC());
+        }
+      }
+    }
+  }, [ordem]);
+
+  useEffect(() => {
+    if (ordem !== undefined) {
+      const { order } = ordem;
+      const { column, sort } = order;
+      if (column === 'population') {
+        if (sort === 'ASC') {
+          setPlanetas(ordenaPopulationASC());
+        } else {
+          setPlanetas(ordenaPopulationDESC());
+        }
+      } else if (column === 'orbital_period') {
+        if (sort === 'ASC') {
+          setPlanetas(ordenaOrbitalASC());
+        } else {
+          setPlanetas(ordenaOrbitalDESC());
+        }
+      }
+    }
+  }, [ordem]);
 
   return (
     <table>
@@ -123,7 +208,7 @@ function Table() {
       <tbody>
         { planetas.map((p) => (
           <tr key={ p.name }>
-            <td>{p.name}</td>
+            <td data-testid="planet-name">{p.name}</td>
             <td>{p.rotation_period}</td>
             <td>{p.orbital_period}</td>
             <td>{p.diameter}</td>
