@@ -21,43 +21,58 @@ function Ordem() {
   };
   return (
     <form>
-      <label htmlFor="select1">
+      <label htmlFor="select11">
         Ordene:
         <select
           name="column"
-          id="select1"
+          id="select11"
           value={ ordem.column }
           onChange={ handleChange }
           data-testid="column-sort"
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          <option value="population" data-testid="option-population">population</option>
+          <option
+            value="orbital_period"
+            data-testid="option-orbital"
+          >
+            orbital_period
+          </option>
+          <option value="diameter" data-testid="option-diameter">diameter</option>
+          <option
+            value="rotation_period"
+            data-testid="option-rotation"
+          >
+            rotation_period
+          </option>
+          <option
+            value="surface_water"
+            data-testid="option-surface"
+          >
+            surface_water
+          </option>
         </select>
-        <label htmlFor="radio1">
-          <input
-            type="radio"
-            id="radio1"
-            name="sort"
-            value="ASC"
-            onChange={ handleChange }
-            data-testid="column-sort-input-asc"
-          />
-          ascendente
-        </label>
-        <label htmlFor="radio2">
-          <input
-            type="radio"
-            id="radio2"
-            name="sort"
-            value="DESC"
-            onChange={ handleChange }
-            data-testid="column-sort-input-desc"
-          />
-          descendente
-        </label>
+      </label>
+      <label htmlFor="radio1">
+        <input
+          type="radio"
+          id="radio1"
+          name="sort"
+          value="ASC"
+          onChange={ handleChange }
+          data-testid="column-sort-input-asc"
+        />
+        ascendente
+      </label>
+      <label htmlFor="radio2">
+        <input
+          type="radio"
+          id="radio2"
+          name="sort"
+          value="DESC"
+          onChange={ handleChange }
+          data-testid="column-sort-input-desc"
+        />
+        descendente
       </label>
       <button
         type="button"

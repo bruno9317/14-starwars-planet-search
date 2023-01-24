@@ -112,26 +112,6 @@ function Table() {
     }
   }, [filter]);
 
-  // const ordenaSurfaceDESC = () => {
-  //   const magic = -1;
-  //   const lista = planetas.sort((a, b) => {
-  //     if (a.surface_water === 'unknown') {
-  //       return 1;
-  //     }
-  //     if (b.surface_water === 'unknown') {
-  //       return magic;
-  //     }
-  //     if (a.surface_water - b.surface_water < 0) {
-  //       return 1;
-  //     }
-  //     if (b.surface_water - a.surface_water < 0) {
-  //       return magic;
-  //     }
-  //     return 0;
-  //   });
-  //   setPlanetas(lista);
-  // };
-
   useEffect(() => {
     if (ordem !== undefined) {
       const { order } = ordem;

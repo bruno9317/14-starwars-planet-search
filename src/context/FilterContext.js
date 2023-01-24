@@ -7,8 +7,6 @@ function FilterProvider({ children }) {
   const [filter, setFilter] = useState([]);
 
   const saveFiltro = (filtro1) => {
-    // console.log(filter.length);
-    // console.log(filtro1);
     setFilter([...filter, filtro1]);
   };
 
