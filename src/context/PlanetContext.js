@@ -9,7 +9,6 @@ function PlanetProvider({ children }) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('https://swapi.dev/api/planets');
-      console.log('oi');
       const data = await response.json();
       const filter = data.results.map((p) => {
         const planetas = p;
@@ -17,7 +16,6 @@ function PlanetProvider({ children }) {
         return planetas;
       });
       setPlanets(filter);
-      console.log('oi');
     };
     fetchData();
   }, []);

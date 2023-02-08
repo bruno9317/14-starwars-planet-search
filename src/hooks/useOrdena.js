@@ -82,7 +82,6 @@ export default function useOrdena() {
     const magic = -1;
     const lista = planets.sort((a, b) => {
       if (a.rotation_period - b.rotation_period < 0) {
-        console.log('a');
         return 1;
       }
       return magic;
